@@ -11,18 +11,12 @@ fi
 UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
 
+docker build -t trx22:stepjt $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;}
 
-INIT_DEF_FILE=${UNIT_PATH}/init.def
-echo "INIT_DEF_FILE = $INIT_DEF_FILE"
-stringarray=(`grep DMS_PARENT_BASELINE ${INIT_DEF_FILE} || { exit 1;}`)
-NX_RELEASE=${stringarray[1]}
-	
-docker build -t trx22:$NX_RELEASE $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;} 
-
-docker run --name nxjt_testrun_container -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" trx22:$NX_RELEASE
+docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" -itd trx22:stepjt
 
 #Now check for error in /volume/Logs/log.txt file
-LOG_FILE=/apps/JenkinsBase/docker/Logs/log_pass.txt
+LOG_FILE=/apps/JenkinsBase/docker/step/Logs/log_pass.txt
 errorCount=0
 
 echo "Checking case for pass condition"
@@ -45,7 +39,7 @@ else
 	exit 1
 fi
 
-LOG_FILE=/apps/JenkinsBase/docker/Logs/log_fail.txt
+LOG_FILE=/apps/JenkinsBase/docker/step/Logs/log_fail.txt
 errorCount=0
 
 echo "Checking case for fail condition"
@@ -66,4 +60,3 @@ else
 	echo "Could not find log file $LOG_FILE"
 	exit 1
 fi
-

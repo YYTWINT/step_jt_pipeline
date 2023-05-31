@@ -2,7 +2,7 @@
 
 # This script deletes all running continers except license server container "saltd_container"
 
-for containerId in `docker ps -a | grep "nxjt_testrun_container" | awk  '{print $1}'`
+for containerId in `docker ps -a | grep "stepjt_testrun_container" | awk  '{print $1}'`
 do
 	echo "Removing container with ID $containerId"
 	docker rm -v -f $containerId

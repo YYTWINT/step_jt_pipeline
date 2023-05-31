@@ -11,7 +11,7 @@ pipeline {
     agent any
 	parameters {
 		string(name: 'SourcePath', defaultValue: '/plm/pnnas/ppic/Data_Exchange/HybridSaaS_Translation/STEP', description : 'Use the latest Binaries from the path provided.')
-		string(name: 'ProductVersion', defaultValue: 'v4.0.0.', description : 'Version of the product to be tested.')
+		string(name: 'ProductVersion', defaultValue: 'v4.0.0', description : 'Version of the product to be tested.')
 		string(name: 'StagePath', defaultValue: '/apps/JenkinsBase/step', description : 'Path where the kits are to be staged.')
 		booleanParam(name: 'Deploy', defaultValue: false, description : 'Deploy staging directory contents to Source path')
 	}

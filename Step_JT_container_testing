@@ -1,0 +1,140 @@
+def gv
+def emailHandle
+def buildDir
+def stageDir
+def BUILD_AGENT='SAAS_di2inpun0050lv0_yytwint_build'
+def TEST_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
+def STAGE_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
+def boolean anyFailure = false
+
+pipeline {
+    agent any
+	parameters {
+		string(name: 'SourcePath', defaultValue: '/plm/pnnas/ppic/Data_Exchange/HybridSaaS_Translation/STEP', description : 'Use the latest Binaries from the path provided.')
+		string(name: 'ProductVersion', defaultValue: 'v4.0.0.', description : 'Version of the product to be tested.')
+		string(name: 'StagePath', defaultValue: '/apps/JenkinsBase/step', description : 'Path where the kits are to be staged.')
+		booleanParam(name: 'Deploy', defaultValue: false, description : 'Deploy staging directory contents to Source path')
+	}
+    stages {
+		stage ('Init'){
+			steps {
+				script{
+					gv = load "Step_JT_container_testing.groovy"
+					emailHandle = load "email.groovy"
+					buildDir="${params.SourcePath}/${params.ProductVersion}/lnx64/TranslatorBinaries"
+					stageDir="${params.StagePath}/${params.ProductVersion}_${BUILD_TIMESTAMP}"
+				}
+			}
+		}
+		stage('StageForContainer') {
+            agent { label "${STAGE_AGENT}" }
+            steps {
+				script{
+					gv.StageForContainer(buildDir,stageDir) 
+				}					
+            }
+        }
+		stage('CheckLicenseServer') {
+            agent { label "${STAGE_AGENT}" }
+            steps {
+				script{
+					echo "stage2"
+					//gv.CheckLicenseServer() 
+				}					
+            }
+        }
+		stage('RemoveRunningContainers-Pre') {
+            agent { label "${STAGE_AGENT}" }
+            steps {
+				script{
+					echo "stage3"
+					//gv.RemoveRunningContainers() 
+				}					
+            }
+        }
+		stage('BuildAndRunDocker') {
+            agent { label "${STAGE_AGENT}" }
+            steps {					
+				script{
+					echo "stage4"
+					//try{
+					//	gv.BuildAndRunDocker(buildDir,stageDir) 
+					//}
+					//catch (Exception e) {
+					//	echo 'Exception occurred: ' + e.toString()
+					//	anyFailure = true
+					//}
+				}			
+            }
+        }
+		stage('DockerCleanup') {
+            agent { label "${STAGE_AGENT}" }
+            steps {
+					echo "stage5"
+					//catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+					//script{
+					//	gv.DockerCleanup(stageDir) 
+					//}
+				}				
+            }
+        }	
+		stage('RemoveRunningContainers-Post') {
+			agent { label "${STAGE_AGENT}" }
+			steps {
+				script{
+					echo "stage6"
+					//gv.RemoveRunningContainers() 
+				}					
+			}
+		}
+		stage('DeployContainer') {
+			agent { label "${STAGE_AGENT}" }
+			steps {
+				script{
+					echo "stage7"
+					//gv.DeployContainer(buildDir,stageDir) 
+				}					
+			}
+		}			
+		stage('Purge Stage') {
+			agent { label "${STAGE_AGENT}" }	
+			steps {
+				script{
+					if( anyFailure == false ) {
+						echo "stage8"
+						//gv.Purge("${params.StagePath}") 
+					}
+					else {
+						echo "Skipping Purge Stage due to earlier failure"
+					}
+				}					
+			}
+		}
+		
+		stage('Evaluate Status') {
+			steps{
+				script {
+					if( anyFailure == true ) {
+						currentBuild.result = 'FAILURE'
+						currentBuild.buildResult = 'FAILURE'
+					}
+				}
+			}
+		}
+    }
+
+    post {
+		
+        success {
+            echo 'All tasks completed successfully.'
+        }
+		failure {
+			echo 'One or more stages have failed.'
+		}	
+		always{
+			script{
+				emailHandle.sendEmail(buildDir,stageDir)
+			}
+		}
+    }
+}

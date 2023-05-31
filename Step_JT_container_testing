@@ -71,9 +71,9 @@ pipeline {
             agent { label "${STAGE_AGENT}" }
             steps {
 					echo "stage5"
-					catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-					script{
-						gv.DockerCleanup(stageDir) 
+					//catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+					//script{
+					//	gv.DockerCleanup(stageDir) 
 					}
 				}				
             }

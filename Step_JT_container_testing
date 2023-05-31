@@ -74,8 +74,8 @@ pipeline {
 					//catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
 					//script{
 					//	gv.DockerCleanup(stageDir) 
-					}
-				}				
+					//}
+				//}				
             }
         }	
 		stage('RemoveRunningContainers-Post') {

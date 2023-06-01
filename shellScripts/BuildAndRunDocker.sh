@@ -28,18 +28,18 @@ if [ -f $LOG_FILE ]
 then
 	echo $LOG_FILE
 	for failingCase in `grep ":137" $LOG_FILE | cut -d : -f 1`
-	do echo $failingCase
-	   echo "Docker test run failed for part : $failingCase"
-	   echo $errorCount
-       ((errorCount++))
-	   echo $errorCount
-	done
+		do 	echo $failingCase
+			echo "Docker test run failed for part : $failingCase"
+			echo $errorCount
+			((errorCount++))
+			echo $errorCount
+		done
 	for passCase in `grep ":0" $LOG_FILE | cut -d : -f 1`
-	do echo $passCase
-	   echo "Docker test run passed for part : $passCase"
-	   ((passCount++))
-	   echo $passCount
-	done
+		do	echo $passCase
+			echo "Docker test run passed for part : $passCase"
+			((passCount++))
+			echo $passCount
+		done
 	
 	if [ $errorCount -ne 0 ]
 	then

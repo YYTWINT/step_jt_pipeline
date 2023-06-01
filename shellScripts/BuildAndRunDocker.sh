@@ -27,7 +27,7 @@ echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
 	echo $LOG_FILE
-	for failingCase in [`grep ":137" $LOG_FILE | cut -d : -f 1`]
+	for failingCase in [`grep ":137" $LOG_FILE`]
 	do 
 		echo $failingCase
 	done

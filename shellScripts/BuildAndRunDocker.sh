@@ -23,9 +23,11 @@ passCount=0
 
 echo "Checking case for pass condition"
 
+
 if [ -f $LOG_FILE ] 
 then
 	echo $LOG_FILE
+	echo `grep ":137" $LOG_FILE | cut -d : -f 1`
 	for failingCase in `grep ":137" $LOG_FILE | cut -d : -f 1`
 	do
 		echo $failingCase

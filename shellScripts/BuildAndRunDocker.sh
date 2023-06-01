@@ -27,8 +27,10 @@ then
 	echo $LOG_FILE
 	for failingCase in `grep ":137" $LOG_FILE | cut -d : -f 1`
 	do
+		echo $failingCase
 		echo "Docker test run failed for part : $failingCase"
 		((errorCount++))
+		echo $errorCount
 	done
 	
 	if [ $errorCount -ne 0 ]

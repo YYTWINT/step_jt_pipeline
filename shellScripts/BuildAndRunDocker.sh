@@ -29,7 +29,7 @@ then
 	echo $LOG_FILE
 	for failingCase in [`grep ":137" $LOG_FILE | cut -d : -f 1`]
 	do 
-		echo "Welcome $failingCase times"
+		echo $failingCase
 	done
 	for failingCase in `grep ":137" $LOG_FILE | cut -d : -f 1`
 		do 	echo $failingCase

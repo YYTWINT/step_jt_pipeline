@@ -27,6 +27,10 @@ echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
 	echo $LOG_FILE
+	for (( c=1; c<=5; c++ ))
+	do 
+		echo "Welcome $c times"
+	done
 	for failingCase in `grep ":137" $LOG_FILE | cut -d : -f 1`
 		do 	echo $failingCase
 			echo "Docker test run failed for part : $failingCase"

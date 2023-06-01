@@ -29,18 +29,17 @@ then
 	echo $LOG_FILE
 	echo "`grep -f ":137" $LOG_FILE | cut -d : -f 1`"
 	for failingCase in `grep ":137" $LOG_FILE | cut -d : -f 1`
-	do
-		echo $failingCase
-		echo "Docker test run failed for part : $failingCase"
-		((errorCount++))
-		echo $errorCount
+	do echo $failingCase
+	   echo "Docker test run failed for part : $failingCase"
+	   echo $errorCount
+       ((errorCount++))
+	   echo $errorCount
 	done
 	for passCase in `grep ":0" $LOG_FILE | cut -d : -f 1`
-	do
-		echo $passCase
-		echo "Docker test run passed for part : $passCase"
-		((passCount++))
-		echo $passCount
+	do echo $passCase
+	   echo "Docker test run passed for part : $passCase"
+	   ((passCount++))
+	   echo $passCount
 	done
 	
 	if [ $errorCount -ne 0 ]

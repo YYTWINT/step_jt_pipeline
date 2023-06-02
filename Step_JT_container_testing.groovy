@@ -58,7 +58,7 @@ def DeployContainer(String buildDir,String stageDir)
 		def stagePath="${stageDir}"
 		def deployFlag="${params.Deploy}"
 		def productVersion="${params.ProductVersion}"
-		def unitFullPath="${buildDir}"
+		def unitFullPath="${params.SourcePath}/${params.ProductVersion}/lnx64/"
 		
 		sh "chmod +x ./shellScripts/DeployContainer.sh "
 		sh "./shellScripts/DeployContainer.sh ${stagePath} ${deployFlag} ${unitFullPath} ${productVersion}"		

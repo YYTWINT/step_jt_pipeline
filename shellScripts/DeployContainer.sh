@@ -24,13 +24,13 @@ then
 	cd ${STAGE_BASE_DIR} || { exit 1;}
 	tar -czf $releaseName.tar.gz TranslatorBinaries/ || { exit 1;}
 	
-	echo "curl -u opentools_bot:YL6MtwZ35 -T $releaseName.tar.gz https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/NXtoJT/$releaseName/ || { exit 1;}"
+	echo "curl -u opentools_bot:YL6MtwZ35 -T $releaseName.tar.gz https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/STEPtoJT/$releaseName/ || { exit 1;}"
 	
-	echo "curl -u opentools_bot:YL6MtwZ35 -T $releaseName.tar.gz https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/NXtoJT/$releaseName/">deployStep.txt
+	echo "curl -u opentools_bot:YL6MtwZ35 -T $releaseName.tar.gz https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/STEPtoJT/$releaseName/">deployStep.txt
 
-	echo "curl -u opentools_bot:YL6MtwZ35 -T JT_Translator_for_STEP_V4_0_0_SaaS_README.txt https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/NXtoJT/$releaseName/ || { exit 1;}"
+	echo "curl -u opentools_bot:YL6MtwZ35 -T JT_Translator_for_STEP_V4_0_0_SaaS_README.txt https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/STEPtoJT/$releaseName/ || { exit 1;}"
 
-	echo "curl -u opentools_bot:YL6MtwZ35 -T JT_Translator_for_STEP_V4_0_0_SaaS_README.txt https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/NXtoJT/$releaseName/">>deployStep.txt
+	echo "curl -u opentools_bot:YL6MtwZ35 -T JT_Translator_for_STEP_V4_0_0_SaaS_README.txt https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/STEPtoJT/$releaseName/">>deployStep.txt
 	
 	cp $releaseName.tar.gz deployStep.txt ${UNIT_PATH}
 

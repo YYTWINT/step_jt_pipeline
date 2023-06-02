@@ -43,8 +43,9 @@ fi
 
 if [ -f $LOG_FILE ] 
 then
-	
-	for failingCase in $(cat /apps/JenkinsBase/docker/step/Logs/log_pass.txt | grep ":137" | cut -d : -f 1)
+	line=$(head -n 1 /apps/JenkinsBase/docker/step/Logs/log_pass.txt)
+	echo $line
+	for failingCase in $(docker exec stepjt_testrun_container cat /volume/step/Logs/log_pass.txt | grep ":137" | cut -d : -f 1)
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
 		echo "Docker test run failed for part : $failingCase"

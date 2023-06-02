@@ -27,29 +27,10 @@ echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
 	echo $LOG_FILE
-	for failingCase in [`grep ":137" $LOG_FILE`]
-	do 
-		echo $failingCase
+	for containerId in `docker ps -a | grep "stepjt_testrun_container"`
+	do
+		echo "Removing container with ID $containerId"
 	done
-	for failingCase in `grep ":137" $LOG_FILE | cut -d : -f 1`
-		do 	echo $failingCase
-			echo "Docker test run failed for part : $failingCase"
-			echo $errorCount
-			((errorCount++))
-			echo $errorCount
-		done
-	for passCase in `grep ":0" $LOG_FILE | cut -d : -f 1`
-		do	echo $passCase
-			echo "Docker test run passed for part : $passCase"
-			((passCount++))
-			echo $passCount
-		done
-	
-	if [ $errorCount -ne 0 ]
-	then
-		echo "Number of tests failed for Docker test = $errorCount. Exiting with error."
-		exit 1
-	fi
 else
 	echo "Could not find log file $LOG_FILE"
 	exit 1

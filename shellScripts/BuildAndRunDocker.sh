@@ -12,15 +12,17 @@ UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
 
 rm -rf /apps/JenkinsBase/docker/step/Logs/*
-> /apps/JenkinsBase/docker/step/Logs/log_pass.txt
+>/apps/JenkinsBase/docker/step/Logs/log_pass.txt
 
 
 docker build -t trx22:stepjt $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;}
+
 docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" -itd trx22:stepjt
 
 #Now check for error in /volume/Logs/log.txt file
 LOG_FILE=/apps/JenkinsBase/docker/step/Logs/log_pass.txt
 errorCount=0
+>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
 
 echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 

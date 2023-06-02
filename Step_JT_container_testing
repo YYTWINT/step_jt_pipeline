@@ -134,7 +134,7 @@ pipeline {
 		always{
 			script{
 			echo 'tesing mail'
-				//emailHandle.sendEmail(buildDir,stageDir)
+				emailHandle.sendEmail(buildDir,stageDir)
 			}
 		}
     }

@@ -39,29 +39,17 @@ def sendEmail(String buildDir, String stageDir)
 				  </tr>
 				  
 				  <tr>
-					<td class="tg-hmp3">NX Release</td>
-					<td class="tg-hmp3">${params.NXRelease}</td>
+					<td class="tg-hmp3">Product Version</td>
+					<td class="tg-hmp3">${params.ProductVersion}</td>
 				  </tr>
-				  
-				  <tr>
-					<td class="tg-0lax">CP#</td>
-					<td class="tg-ur59">${CPNum}</td>
-				  </tr>
-				  
 				  <tr>
 					<td class="tg-0lax">Unit path</td>
 					<td class="tg-ur59">${buildDir}</td>
 				  </tr>
-				  
 				  <tr>
 					<td class="tg-hmp3">Stage path</td>
 					<td class="tg-hmp3">${stageDir}</td>
 				  </tr>
-				  <tr>
-					<td class="tg-0lax">Customer</td>
-					<td class="tg-ur59">${params.Customer}</td>
-				  </tr>
-				  
 				  <tr>
 					<td class="tg-hmp3">Deploy flag</td>
 					<td class="tg-hmp3">${params.Deploy}</td>
@@ -70,7 +58,6 @@ def sendEmail(String buildDir, String stageDir)
 					<td class="tg-0lax">Status</td>
 					<td class="tg-ur59">${currentBuild.currentResult}</td>
 				  </tr>
-				  
 				  <tr>
 					<td class="tg-hmp3">Job log details</td>
 					<td class="tg-hmp3"><a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></td>

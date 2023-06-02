@@ -27,7 +27,7 @@ echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
 	echo $LOG_FILE
-	for containerId in `grep -x ":0" /apps/JenkinsBase/docker/step/Logs/log_pass.txt`
+	for containerId in `grep -x "1" /apps/JenkinsBase/docker/step/Logs/testing.txt`
 	do
 		echo "container with ID $containerId"
 	done

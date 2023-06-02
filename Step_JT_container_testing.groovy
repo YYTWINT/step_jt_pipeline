@@ -57,10 +57,11 @@ def DeployContainer(String buildDir,String stageDir)
 	script{		
 		def stagePath="${stageDir}"
 		def deployFlag="${params.Deploy}"
+		def productVersion="${params.ProductVersion}"
 		def unitFullPath="${buildDir}"
 		
 		sh "chmod +x ./shellScripts/DeployContainer.sh "
-		sh "./shellScripts/DeployContainer.sh ${stagePath} ${deployFlag} ${unitFullPath}"		
+		sh "./shellScripts/DeployContainer.sh ${stagePath} ${deployFlag} ${unitFullPath} ${productVersion}"		
 	}
 }
 

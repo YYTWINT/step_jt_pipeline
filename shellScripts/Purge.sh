@@ -10,7 +10,7 @@ then
 fi
 
 WORK_DIR=$1
-KEEP_DIR_COUNT=3
+KEEP_DIR_COUNT=
 
 echo "Purging dir ${WORK_DIR}"
 

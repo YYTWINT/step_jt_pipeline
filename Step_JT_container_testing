@@ -71,11 +71,11 @@ pipeline {
             agent { label "${STAGE_AGENT}" }
             steps {
 					echo "stage5"
-					//catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-					//script{
-					//	gv.DockerCleanup(stageDir) 
-					//}
-				//}				
+					catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+					script{
+						gv.DockerCleanup(stageDir) 
+					}
+				}				
             }
         }	
 		stage('RemoveRunningContainers-Post') {
@@ -83,7 +83,7 @@ pipeline {
 			steps {
 				script{
 					echo "stage6"
-					//gv.RemoveRunningContainers() 
+					gv.RemoveRunningContainers() 
 				}					
 			}
 		}
@@ -92,7 +92,7 @@ pipeline {
 			steps {
 				script{
 					echo "stage7"
-					//gv.DeployContainer(buildDir,stageDir) 
+					gv.DeployContainer(buildDir,stageDir) 
 				}					
 			}
 		}			
@@ -102,7 +102,7 @@ pipeline {
 				script{
 					if( anyFailure == false ) {
 						echo "stage8"
-						//gv.Purge("${params.StagePath}") 
+						gv.Purge("${params.StagePath}") 
 					}
 					else {
 						echo "Skipping Purge Stage due to earlier failure"

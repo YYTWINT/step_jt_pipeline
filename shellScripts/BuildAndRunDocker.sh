@@ -12,8 +12,8 @@ UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
 
 #rm -rf /apps/JenkinsBase/docker/step/Logs/*
->/apps/JenkinsBase/docker/step/Logs/log_pass.txt
-chmod 0755 /apps/JenkinsBase/docker/step/Logs/log_pass.txt
+# >/apps/JenkinsBase/docker/step/Logs/log_pass.txt
+# chmod 0755 /apps/JenkinsBase/docker/step/Logs/log_pass.txt
 
 docker build -t trx22:stepjt $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;}
 
@@ -28,18 +28,18 @@ errorCount=0
 echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
-	echo $(cat /apps/JenkinsBase/docker/step/Logs/log_pass.txt)
-	for failingCase in $(cat $LOG_FILE | grep ":137" | cut -d : -f 1)
+	
+	for failingCase in $(cat /apps/JenkinsBase/docker/step/Logs/log_pass.txt | grep ":137" | cut -d : -f 1)
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
 		echo "Docker test run failed for part : $failingCase"
 		((errorCount++))
 	done
-	for failingCase1 in $(cat /apps/JenkinsBase/docker/step/Logs/testing.txt | grep ":137" | cut -d : -f 1)
+	
+	for failingCase1 in `grep ":137" /apps/JenkinsBase/docker/step/Logs/testing.txt | cut -d : -f 1`
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
 		echo "Docker test : $failingCase1"
-		((errorCount++))
 	done
 
 	if [ $errorCount -ne 0 ]

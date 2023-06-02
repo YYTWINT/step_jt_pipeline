@@ -31,6 +31,9 @@ then
 	do
 		echo $failingCase
 		echo "Docker test run failed for part : $failingCase"
+		echo $errorCount
+		((errorCount++))
+		echo $errorCount
 	done
 else
 	echo "Could not find log file $LOG_FILE"

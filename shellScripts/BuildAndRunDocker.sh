@@ -27,7 +27,7 @@ errorCount=0
 
 echo "Checking case for pass condition"
 
-if [ -r "$LOG_FILE" ]
+if [ -r "$LOG_FILEa" ]
 then
     echo "$file is readable."
 else
@@ -46,7 +46,7 @@ then
 	
 	for failingCase1 in `grep ":137" /apps/JenkinsBase/docker/step/Logs/testing.txt | cut -d : -f 1`
 	do
-		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
+		echo $failingCase1 >>/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
 		echo "Docker test : $failingCase1"
 	done
 

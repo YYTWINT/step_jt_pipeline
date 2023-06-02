@@ -11,7 +11,7 @@ fi
 UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
 
-rm -rf /apps/JenkinsBase/docker/step/Logs/*
+#rm -rf /apps/JenkinsBase/docker/step/Logs/*
 >/apps/JenkinsBase/docker/step/Logs/log_pass.txt
 chmod 0755 /apps/JenkinsBase/docker/step/Logs/log_pass.txt
 
@@ -28,7 +28,7 @@ errorCount=0
 echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
-	cat $LOG_FILE
+	$(cat /apps/JenkinsBase/docker/step/Logs/log_pass.txt)
 	for failingCase in $(cat $LOG_FILE | grep ":137" | cut -d : -f 1)
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt

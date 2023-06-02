@@ -19,7 +19,7 @@ if [ ${EXECUTE_DEPLOY} == "true" ]
 then
 	echo "Deploy flag is set to true. Executing deploy stage for step to jt ${PRODUCTVERSION}..."
 	
-	releaseName='STEP_'.'${PRODUCTVERSION}.'
+	releaseName='STEP_'${PRODUCTVERSION}
 	
 	cd ${STAGE_BASE_DIR} || { exit 1;}
 	tar -czf $releaseName.tar.gz TranslatorBinaries/ || { exit 1;}

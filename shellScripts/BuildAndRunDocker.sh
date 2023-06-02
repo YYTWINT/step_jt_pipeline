@@ -27,9 +27,9 @@ echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
 	echo $LOG_FILE
-	for containerId in `docker ps -a | grep "stepjt_testrun_container"`
+	for containerId in $LOG_FILE
 	do
-		echo "Removing container with ID $containerId"
+		echo "container with ID $containerId"
 	done
 else
 	echo "Could not find log file $LOG_FILE"

@@ -13,7 +13,7 @@ STAGE_DIR=$2/TranslatorBinaries
 
 rm -rf /apps/JenkinsBase/docker/step/Logs/*
 >/apps/JenkinsBase/docker/step/Logs/log_pass.txt
-
+chmod 0755 /apps/JenkinsBase/docker/step/Logs/log_pass.txt
 
 docker build -t trx22:stepjt $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;}
 

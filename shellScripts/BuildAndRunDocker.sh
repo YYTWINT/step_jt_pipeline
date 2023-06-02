@@ -25,12 +25,15 @@ errorCount=0
 >/apps/JenkinsBase/docker/step/Logs/failedCases.txt
 >/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
 
-if [ ! -e /apps/JenkinsBase/docker/step/Logs/log_pass.txt ] ; then
-  chown -R yytwint:jtusr /apps/JenkinsBase/docker/step/Logs
-  touch /apps/JenkinsBase/docker/step/Logs/log_pass.txt
+echo "Checking case for pass condition"
+
+if [ -r "$LOG_FILE" ]
+then
+    echo "$file is readable."
+else
+    echo "$file is not readable."
 fi
 
-echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
 	

@@ -17,14 +17,12 @@ docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume -
 
 #Now check for error in /volume/Logs/log.txt file
 LOG_FILE=/apps/JenkinsBase/docker/step/Logs/log_pass.txt
-echo $LOG_FILE
 errorCount=0
 
 echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
-	echo $LOG_FILE	
-	for failingCase in $(cat /apps/JenkinsBase/docker/step/Logs/testing.txt | grep ":137" | cut -d : -f 1)
+	for failingCase in $(cat /apps/JenkinsBase/docker/step/Logs/log_pass.txt | grep ":137" | cut -d : -f 1)
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
 		echo "Docker test run failed for part : $failingCase"

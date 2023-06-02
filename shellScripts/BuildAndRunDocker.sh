@@ -27,11 +27,18 @@ errorCount=0
 
 echo "Checking case for pass condition"
 
-if [ -r "$LOG_FILEa" ]
+if [ -r "$LOG_FILE" ]
 then
     echo "$file is readable."
 else
     echo "$file is not readable."
+fi
+
+if [ -x "$LOG_FILE" ]
+then
+    echo "$file is executable."
+else
+    echo "$file is not executable."
 fi
 
 if [ -f $LOG_FILE ] 

@@ -29,12 +29,14 @@ then
 	echo $LOG_FILE
 	for failingCase in $(cat /apps/JenkinsBase/docker/step/Logs/testing.txt | grep ":137" | cut -d : -f 1)
 	do
-		echo $failingCase
 		echo "Docker test run failed for part : $failingCase"
-		echo $errorCount
 		((errorCount++))
-		echo $errorCount
 	done
+	if [ $errorCount -ne 0 ]
+	then
+		echo "Number of tests failed for Docker test = $errorCount. Exiting with error."
+		exit 1
+	fi
 else
 	echo "Could not find log file $LOG_FILE"
 	exit 1

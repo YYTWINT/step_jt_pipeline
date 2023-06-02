@@ -17,6 +17,7 @@ docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume -
 
 #Now check for error in /volume/Logs/log.txt file
 LOG_FILE=/apps/JenkinsBase/docker/step/Logs/log_pass.txt
+chmod 0755 $LOG_FILE || { exit 1;}
 errorCount=0
 rm -rf /apps/JenkinsBase/docker/step/Logs/failedCases.txt
 

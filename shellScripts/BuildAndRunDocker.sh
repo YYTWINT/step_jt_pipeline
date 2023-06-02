@@ -28,7 +28,7 @@ errorCount=0
 echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
-	$(cat /apps/JenkinsBase/docker/step/Logs/log_pass.txt)
+	echo $(cat /apps/JenkinsBase/docker/step/Logs/log_pass.txt)
 	for failingCase in $(cat $LOG_FILE | grep ":137" | cut -d : -f 1)
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt

@@ -14,7 +14,7 @@ STAGE_DIR=$2/TranslatorBinaries
 #rm -rf /apps/JenkinsBase/docker/step/Logs/*
 # >/apps/JenkinsBase/docker/step/Logs/log_pass.txt
 # chmod 0755 /apps/JenkinsBase/docker/step/Logs/log_pass.txt
-echo ''>/apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
+
 #$ wc -c /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
 
 #docker activities
@@ -70,3 +70,4 @@ else
 	echo "Could not find log file $LOG_FILE"
 	exit 1
 fi
+echo ''>/apps/JenkinsBase/docker/step/Logs/step_log_pass.txt

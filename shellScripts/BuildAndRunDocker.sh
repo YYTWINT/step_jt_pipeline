@@ -22,6 +22,8 @@ docker build -t trx22:stepjt $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;}
 
 docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" -itd trx22:stepjt
 
+
+sleep 10
 #Now check for error in /volume/Logs/log.txt file
 LOG_FILE=/apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
 errorCount=0

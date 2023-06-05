@@ -21,7 +21,7 @@ rm -rf /apps/JenkinsBase/docker/step/Logs/*
 #docker activities
 docker build -t trx22:stepjt $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;}
 
-docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" -itd trx22:stepjt
+docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" --detach trx22:stepjt
 
 
 sleep 10

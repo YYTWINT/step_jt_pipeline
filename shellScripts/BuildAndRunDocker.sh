@@ -35,7 +35,7 @@ then
 	
 	if [ $errorCount -ne 0 ]
 	then
-		echo "Number of tests failed for Docker test = $errorCount. Exiting with error."
+		echo "Number of tests failed for Docker test = $errorCount. Exiting with error.Please find the failed test cases at /apps/JenkinsBase/docker/step/Logs/failedCases.txt"
 		exit 1
 	fi
 else

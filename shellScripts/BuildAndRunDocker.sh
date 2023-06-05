@@ -11,51 +11,28 @@ fi
 UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
 
-rm -rf /apps/JenkinsBase/docker/step/Logs/*
-# >/apps/JenkinsBase/docker/step/Logs/log_pass.txt
-# chmod 0755 /apps/JenkinsBase/docker/step/Logs/log_pass.txt
-
-#$ wc -c /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
-
 #docker activities
 docker build -t trx22:stepjt $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;}
 
 docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" trx22:stepjt
 
-
-sleep 10
 #Now check for error in /volume/Logs/log.txt file
 LOG_FILE=/apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
 errorCount=0
->/apps/JenkinsBase/docker/step/Logs/passedCases.txt
+
 >/apps/JenkinsBase/docker/step/Logs/failedCases.txt
->/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
 
 echo "Checking case for pass condition"
 
 if [ -f $LOG_FILE ] 
 then
-	#for failingCase in $(cat /apps/JenkinsBase/docker/step/testing1.txt | grep ":137" | cut -d : -f 1)
-	for failingCase2 in `grep ":0" /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt | cut -d : -f 1`
-	do
-		echo $failingCase2 >>/apps/JenkinsBase/docker/step/Logs/passedCases.txt
-		echo "Docker test run failed for part step_log : $failingCase2"
-		#((errorCount++))
-	done
-	
-	for failingCase in `grep ":137" /apps/JenkinsBase/docker/step/testing1.txt | cut -d : -f 1`
+	for failingCase in `grep -v ":0" /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt | cut -d : -f 1`
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
 		echo "Docker test run failed for part : $failingCase"
-		#((errorCount++))
+		(errorCount++))
 	done
 	
-	for failingCase1 in `grep ":137" /apps/JenkinsBase/docker/step/testing.txt | cut -d : -f 1`
-	do
-		echo $failingCase1 >>/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
-		echo "Docker test : $failingCase1"
-	done
-
 	if [ $errorCount -ne 0 ]
 	then
 		echo "Number of tests failed for Docker test = $errorCount. Exiting with error."
@@ -65,5 +42,3 @@ else
 	echo "Could not find log file $LOG_FILE"
 	exit 1
 fi
-
-#touch /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt

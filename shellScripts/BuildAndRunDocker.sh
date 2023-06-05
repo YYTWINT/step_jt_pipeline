@@ -12,7 +12,6 @@ UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
 
 rm -rf /apps/JenkinsBase/docker/step/Logs/*
-> /apps/JenkinsBase/docker/step/testing1.txt
 # >/apps/JenkinsBase/docker/step/Logs/log_pass.txt
 # chmod 0755 /apps/JenkinsBase/docker/step/Logs/log_pass.txt
 
@@ -21,7 +20,7 @@ rm -rf /apps/JenkinsBase/docker/step/Logs/*
 #docker activities
 docker build -t trx22:stepjt $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;}
 
-docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" --detach trx22:stepjt
+docker run --name stepjt_testrun_container -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" trx22:stepjt
 
 
 sleep 10

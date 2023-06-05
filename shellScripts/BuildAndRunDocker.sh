@@ -11,7 +11,7 @@ fi
 UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
 
-#rm -rf /apps/JenkinsBase/docker/step/Logs/*
+rm -rf /apps/JenkinsBase/docker/step/Logs/*
 # >/apps/JenkinsBase/docker/step/Logs/log_pass.txt
 # chmod 0755 /apps/JenkinsBase/docker/step/Logs/log_pass.txt
 
@@ -31,20 +31,6 @@ errorCount=0
 >/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
 
 echo "Checking case for pass condition"
-
-if [ -r "$LOG_FILE" ]
-then
-    echo "$file is readable."
-else
-    echo "$file is not readable."
-fi
-
-if [ -x "$LOG_FILE" ]
-then
-    echo "$file is executable."
-else
-    echo "$file is not executable."
-fi
 
 if [ -f $LOG_FILE ] 
 then

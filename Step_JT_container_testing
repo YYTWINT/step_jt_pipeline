@@ -2,8 +2,6 @@ def gv
 def emailHandle
 def buildDir
 def stageDir
-def BUILD_AGENT='SAAS_di2inpun0050lv0_yytwint_build'
-def TEST_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
 def STAGE_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
 def boolean anyFailure = false
 
@@ -38,7 +36,6 @@ pipeline {
             agent { label "${STAGE_AGENT}" }
             steps {
 				script{
-					echo "stage2"
 					gv.CheckLicenseServer() 
 				}					
             }
@@ -47,7 +44,6 @@ pipeline {
             agent { label "${STAGE_AGENT}" }
             steps {
 				script{
-					echo "stage3"
 					gv.RemoveRunningContainers() 
 				}					
             }
@@ -56,7 +52,6 @@ pipeline {
             agent { label "${STAGE_AGENT}" }
             steps {					
 				script{
-					echo "stage4"
 					try{
 						gv.BuildAndRunDocker(buildDir,stageDir) 
 					}
@@ -73,8 +68,7 @@ pipeline {
 					echo "stage5"
 					catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
 					script{
-						echo "stage5"
-						//gv.DockerCleanup(stageDir) 
+						gv.DockerCleanup(stageDir) 
 					}
 				}				
             }
@@ -83,8 +77,7 @@ pipeline {
 			agent { label "${STAGE_AGENT}" }
 			steps {
 				script{
-					echo "stage6"
-					//gv.RemoveRunningContainers() 
+					gv.RemoveRunningContainers() 
 				}					
 			}
 		}
@@ -92,7 +85,6 @@ pipeline {
 			agent { label "${STAGE_AGENT}" }
 			steps {
 				script{
-					echo "stage7"
 					gv.DeployContainer(buildDir,stageDir) 
 				}					
 			}
@@ -102,7 +94,6 @@ pipeline {
 			steps {
 				script{
 					if( anyFailure == false ) {
-						echo "stage8"
 						gv.Purge("${params.StagePath}") 
 					}
 					else {
@@ -134,8 +125,7 @@ pipeline {
 		}	
 		always{
 			script{
-			echo 'tesing mail'
-				//emailHandle.sendEmail(buildDir,stageDir)
+				emailHandle.sendEmail(buildDir,stageDir)
 			}
 		}
     }

@@ -26,7 +26,7 @@ echo "Checking case for pass condition"
 
 if [ -f $LOG_FILE ] 
 then
-	for failingCase in `grep -v ":0" /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt | cut -d : -f 1`
+	for failingCase in `grep -v ":0" /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt`
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
 		echo "Docker test run failed for part : $failingCase"
@@ -35,7 +35,7 @@ then
 	
 	if [ $errorCount -ne 0 ]
 	then
-		echo "Number of tests failed for Docker test = $errorCount. Exiting with error.Please find the failed test cases at /apps/JenkinsBase/docker/step/Logs/failedCases.txt"
+		echo "Number of tests failed for Docker test = $errorCount. Exiting with error.Please find the failed test cases with error code at /apps/JenkinsBase/docker/step/Logs/failedCases.txt"
 		exit 1
 	fi
 else

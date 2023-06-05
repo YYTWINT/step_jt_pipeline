@@ -30,7 +30,7 @@ then
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
 		echo "Docker test run failed for part : $failingCase"
-		(errorCount++))
+		((errorCount++))
 	done
 	
 	if [ $errorCount -ne 0 ]

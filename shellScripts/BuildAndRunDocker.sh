@@ -12,6 +12,7 @@ UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
 
 rm -rf /apps/JenkinsBase/docker/step/Logs/*
+> /apps/JenkinsBase/docker/step/testing1.txt
 # >/apps/JenkinsBase/docker/step/Logs/log_pass.txt
 # chmod 0755 /apps/JenkinsBase/docker/step/Logs/log_pass.txt
 
@@ -27,8 +28,8 @@ sleep 10
 #Now check for error in /volume/Logs/log.txt file
 LOG_FILE=/apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
 errorCount=0
->/apps/JenkinsBase/docker/step/Logs/failedCases.txt
->/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
+#>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
+#>/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
 
 echo "Checking case for pass condition"
 

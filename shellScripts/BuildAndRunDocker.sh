@@ -55,7 +55,7 @@ then
 		((errorCount++))
 	done
 	
-	for failingCase1 in `grep ":137" /apps/JenkinsBase/docker/step/Logs/testing.txt | cut -d : -f 1`
+	for failingCase1 in `grep ":137" /apps/JenkinsBase/docker/step/testing.txt | cut -d : -f 1`
 	do
 		echo $failingCase1 >>/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
 		echo "Docker test : $failingCase1"
@@ -71,4 +71,4 @@ else
 	exit 1
 fi
 
-touch /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
+#touch /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt

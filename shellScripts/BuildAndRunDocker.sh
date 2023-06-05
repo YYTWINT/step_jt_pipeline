@@ -70,4 +70,5 @@ else
 	echo "Could not find log file $LOG_FILE"
 	exit 1
 fi
->/apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
+
+> /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt

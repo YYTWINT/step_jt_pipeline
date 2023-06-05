@@ -71,4 +71,4 @@ else
 	exit 1
 fi
 
-> /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
+touch /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt

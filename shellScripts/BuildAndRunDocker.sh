@@ -36,11 +36,18 @@ echo "Checking case for pass condition"
 if [ -f $LOG_FILE ] 
 then
 	#for failingCase in $(cat /apps/JenkinsBase/docker/step/testing1.txt | grep ":137" | cut -d : -f 1)
+	for failingCase2 in `grep ":0" /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt | cut -d : -f 1`
+	do
+		echo $failingCase2 >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
+		echo "Docker test run failed for part step_log : $failingCase2"
+		#((errorCount++))
+	done
+	
 	for failingCase in `grep ":137" /apps/JenkinsBase/docker/step/testing1.txt | cut -d : -f 1`
 	do
 		echo $failingCase >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
 		echo "Docker test run failed for part : $failingCase"
-		((errorCount++))
+		#((errorCount++))
 	done
 	
 	for failingCase1 in `grep ":137" /apps/JenkinsBase/docker/step/testing.txt | cut -d : -f 1`

@@ -23,3 +23,6 @@ fi
 
 # Copy all 
 cp -r ${SOURCE_PATH}/*   ${STAGE_DIR}/ || { exit 1;}
+echo " " >> ${STAGE_DIR}/dockerfile
+echo " " >> ${STAGE_DIR}/dockerfile
+echo "ENTRYPOINT /volume/step/run_stepdocker" >> ${STAGE_DIR}/dockerfile

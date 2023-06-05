@@ -28,8 +28,9 @@ sleep 10
 #Now check for error in /volume/Logs/log.txt file
 LOG_FILE=/apps/JenkinsBase/docker/step/Logs/step_log_pass.txt
 errorCount=0
-#>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
-#>/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
+>/apps/JenkinsBase/docker/step/Logs/passedCases.txt
+>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
+>/apps/JenkinsBase/docker/step/Logs/failedCases1.txt
 
 echo "Checking case for pass condition"
 
@@ -38,7 +39,7 @@ then
 	#for failingCase in $(cat /apps/JenkinsBase/docker/step/testing1.txt | grep ":137" | cut -d : -f 1)
 	for failingCase2 in `grep ":0" /apps/JenkinsBase/docker/step/Logs/step_log_pass.txt | cut -d : -f 1`
 	do
-		echo $failingCase2 >>/apps/JenkinsBase/docker/step/Logs/failedCases.txt
+		echo $failingCase2 >>/apps/JenkinsBase/docker/step/Logs/passedCases.txt
 		echo "Docker test run failed for part step_log : $failingCase2"
 		#((errorCount++))
 	done
